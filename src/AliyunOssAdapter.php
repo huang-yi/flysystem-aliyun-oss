@@ -4,6 +4,7 @@ namespace HuangYi\FlysystemAliyunOss;
 
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\Adapter\CanOverwriteFiles;
+use League\Flysystem\Adapter\Polyfill\StreamedTrait;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
 use OSS\Model\ObjectInfo;
@@ -11,6 +12,8 @@ use OSS\OssClient;
 
 class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
 {
+    use StreamedTrait;
+
     /**
      * OssClient.
      *
@@ -76,18 +79,6 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
         $contents = $this->client->getObject($this->bucket, $path, $this->options);
 
         return compact('contents');
-    }
-
-    /**
-     * Read a file as a stream.
-     *
-     * @param string $path
-     *
-     * @return array|false
-     */
-    public function readStream($path)
-    {
-        return $this->read($path);
     }
 
     /**
@@ -212,20 +203,6 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     }
 
     /**
-     * Write a new file using a stream.
-     *
-     * @param string   $path
-     * @param resource $resource
-     * @param Config   $config   Config object
-     *
-     * @return array|false false on failure file meta data on success
-     */
-    public function writeStream($path, $resource, Config $config)
-    {
-        return $this->write($path, $resource, $config);
-    }
-
-    /**
      * Update a file.
      *
      * @param string $path
@@ -237,20 +214,6 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     public function update($path, $contents, Config $config)
     {
         return $this->write($path, $contents, $config);
-    }
-
-    /**
-     * Update a file using a stream.
-     *
-     * @param string   $path
-     * @param resource $resource
-     * @param Config   $config   Config object
-     *
-     * @return array|false false on failure file meta data on success
-     */
-    public function updateStream($path, $resource, Config $config)
-    {
-        return $this->write($path, $resource, $config);
     }
 
     /**
