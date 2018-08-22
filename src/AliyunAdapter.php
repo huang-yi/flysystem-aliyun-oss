@@ -1,6 +1,6 @@
 <?php
 
-namespace HuangYi\Flysystem\AliyunOSS;
+namespace HuangYi\FlysystemAliyunOss;
 
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\AdapterInterface;
