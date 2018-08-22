@@ -1,0 +1,30 @@
+{
+    "name": "huang-yi/flysystem-aliyun-oss",
+    "description": "Flysystem adapter for the Aliyun OSS",
+    "keywords": ["flysystem", "aliyun", "oss"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Huang Yi",
+            "email": "coodeer@163.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "aliyuncs/oss-sdk-php": "2.3.*",
+        "league/flysystem": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "HuangYi\\Flysystem\\AliyunOSS\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HuangYi\\Flysystem\\AliyunOSS\\": "tests"
+        }
+    }
+}
