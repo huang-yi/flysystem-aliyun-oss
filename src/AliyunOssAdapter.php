@@ -8,7 +8,7 @@ use League\Flysystem\Config;
 use OSS\Model\ObjectInfo;
 use OSS\OssClient;
 
-class AliyunAdapter extends AbstractAdapter
+class AliyunOssAdapter extends AbstractAdapter
 {
     /**
      * OssClient.
