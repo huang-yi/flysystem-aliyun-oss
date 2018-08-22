@@ -3,12 +3,13 @@
 namespace HuangYi\FlysystemAliyunOss;
 
 use League\Flysystem\Adapter\AbstractAdapter;
+use League\Flysystem\Adapter\CanOverwriteFiles;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
 use OSS\Model\ObjectInfo;
 use OSS\OssClient;
 
-class AliyunOssAdapter extends AbstractAdapter
+class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
 {
     /**
      * OssClient.
