@@ -1,3 +1,3 @@
 # Flysystem-Aliyun-OSS
 
-This is a Flysystem adapter for the Aliyun OSS.
+This package provider a Flysystem adapter for the Aliyun OSS.
