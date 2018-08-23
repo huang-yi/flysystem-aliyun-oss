@@ -111,27 +111,24 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
             $results = $this->client->listObjects($this->bucket, $options);
 
             foreach ($results->getObjectList() as $object) {
-                $contents[] = $this->normalizeContent($object);
+                $contents[] = [
+                    'type' => $object->getSize() === 0 ? 'dir' : 'file',
+                    'path' => $this->removePathPrefix($object->getKey()),
+                    'timestamp' => strtotime($object->getLastModified()),
+                    'size' => $object->getSize(),
+                ];
+            }
+
+            foreach ($results->getPrefixList() as $object) {
+                $contents[] = [
+                    'type' => 'dir',
+                    'path' => $this->removePathPrefix($object->getPrefix()),
+                    'timestamp' => 0,
+                ];
             }
         } while ($marker = $results->getNextMarker());
 
         return $contents;
-    }
-
-    /**
-     * Normalize content.
-     *
-     * @param \OSS\Model\ObjectInfo $object
-     * @return array
-     */
-    protected function normalizeContent(ObjectInfo $object)
-    {
-        return [
-            'type' => $object->getSize() === 0 ? 'dir' : 'file',
-            'path' => $this->removePathPrefix($object->getKey()),
-            'timestamp' => strtotime($object->getLastModified()),
-            'size' => $object->getSize(),
-        ];
     }
 
     /**
