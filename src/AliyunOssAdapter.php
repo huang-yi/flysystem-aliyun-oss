@@ -7,7 +7,6 @@ use League\Flysystem\Adapter\CanOverwriteFiles;
 use League\Flysystem\Adapter\Polyfill\StreamedTrait;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
-use OSS\Model\ObjectInfo;
 use OSS\OssClient;
 
 class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
@@ -260,7 +259,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     {
         $path = $this->applyPathPrefix($path);
 
-        $this->client->deleteObject($path);
+        $this->client->deleteObject($this->bucket, $path, $this->options);
 
         return true;
     }
