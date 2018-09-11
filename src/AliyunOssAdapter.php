@@ -274,7 +274,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
         $file = [
             'type' => 'file',
             'path' => $path,
-            'content' => $response->getBody(),
+            'contents' => $response->getBody(),
         ];
 
         if ($response->hasHeader('Last-Modified')) {
