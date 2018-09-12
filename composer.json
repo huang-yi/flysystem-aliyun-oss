@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^7.0",
-        "huang-yi/aliyun-oss": "dev-master",
+        "huang-yi/aliyun-oss": "0.1.*",
         "league/flysystem": "^1.0"
     },
     "autoload": {
