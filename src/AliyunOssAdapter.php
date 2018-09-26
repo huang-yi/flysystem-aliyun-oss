@@ -307,6 +307,14 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     {
         $pathWithPrefix = rtrim($this->applyPathPrefix($path), '/');
 
+        if ($config->has('ContentType')) {
+            if (! isset($this->options['headers'])) {
+                $this->options['headers'] = [];
+            }
+
+            $this->options['headers']['Content-Type'] = $config->get('ContentType');
+        }
+
         $response = $this->client->object->putObject($pathWithPrefix, $contents, $this->options);
 
         return $this->transformFile($response, $path);
