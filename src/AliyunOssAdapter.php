@@ -3,14 +3,14 @@
 namespace HuangYi\FlysystemAliyunOss;
 
 use Closure;
-use HuangYi\AliyunOss\Contracts\ResponseContract;
-use HuangYi\AliyunOss\Exceptions\RequestException;
+use League\Flysystem\Config;
 use HuangYi\AliyunOss\OssClient;
+use League\Flysystem\AdapterInterface;
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\Adapter\CanOverwriteFiles;
+use HuangYi\AliyunOss\Contracts\ResponseContract;
+use HuangYi\AliyunOss\Exceptions\RequestException;
 use League\Flysystem\Adapter\Polyfill\StreamedTrait;
-use League\Flysystem\AdapterInterface;
-use League\Flysystem\Config;
 
 class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
 {
@@ -33,9 +33,9 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Aliyun OSS Adapter.
      *
-     * @param \HuangYi\AliyunOss\OssClient $client
-     * @param string $prefix
-     * @param array $options
+     * @param  \HuangYi\AliyunOss\OssClient  $client
+     * @param  string  $prefix
+     * @param  array  $options
      * @return void
      */
     public function __construct(OssClient $client, string $prefix = '', array $options = [])
@@ -48,8 +48,9 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Check whether a file exists.
      *
-     * @param string $path
+     * @param  string  $path
      * @return bool
+     *
      * @throws \HuangYi\AliyunOss\Exceptions\RequestException
      */
     public function has($path)
@@ -66,8 +67,9 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Read a file.
      *
-     * @param string $path
+     * @param  string  $path
      * @return array|false
+     *
      * @throws \HuangYi\AliyunOss\Exceptions\RequestException
      */
     public function read($path)
@@ -84,9 +86,10 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * List contents of a directory.
      *
-     * @param string $directory
-     * @param bool $recursive
+     * @param  string  $directory
+     * @param  bool  $recursive
      * @return array
+     *
      * @throws \HuangYi\AliyunOss\Exceptions\RequestException
      */
     public function listContents($directory = '', $recursive = false)
@@ -122,8 +125,8 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     }
 
     /**
-     * @param string $directory
-     * @param bool $recursive
+     * @param  string  $directory
+     * @param  bool  $recursive
      * @return array
      */
     protected function getListContentsQuery($directory, $recursive)
@@ -150,7 +153,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Transform contents.
      *
-     * @param array $rawContents
+     * @param  array  $rawContents
      * @return array
      */
     protected function transformContents(array $rawContents)
@@ -181,7 +184,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Transform directories.
      *
-     * @param array $rawDirectories
+     * @param  array  $rawDirectories
      * @return array
      */
     protected function transformDirectories(array $rawDirectories)
@@ -205,7 +208,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Get all the meta data of a file or directory.
      *
-     * @param string $path
+     * @param  string  $path
      *
      * @return array|false
      *
@@ -225,7 +228,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Get the size of a file.
      *
-     * @param string $path
+     * @param  string  $path
      *
      * @return array|false
      *
@@ -239,7 +242,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Get the mimetype of a file.
      *
-     * @param string $path
+     * @param  string  $path
      *
      * @return array|false
      *
@@ -253,7 +256,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Get the last modified time of a file as a timestamp.
      *
-     * @param string $path
+     * @param  string  $path
      *
      * @return array|false
      *
@@ -265,8 +268,8 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     }
 
     /**
-     * @param \HuangYi\AliyunOss\Contracts\ResponseContract $response
-     * @param string $path
+     * @param  \HuangYi\AliyunOss\Contracts\ResponseContract  $response
+     * @param  string  $path
      * @return array
      */
     protected function transformFile(ResponseContract $response, $path)
@@ -295,10 +298,9 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Write a new file.
      *
-     * @param string $path
-     * @param string $contents
-     * @param Config $config Config object
-     *
+     * @param  string  $path
+     * @param  string  $contents
+     * @param  Config  $config Config object
      * @return array|false false on failure file meta data on success
      *
      * @throws \HuangYi\AliyunOss\Exceptions\RequestException
@@ -323,10 +325,9 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Update a file.
      *
-     * @param string $path
-     * @param string $contents
-     * @param Config $config Config object
-     *
+     * @param  string  $path
+     * @param  string  $contents
+     * @param  Config  $config Config object
      * @return array|false false on failure file meta data on success
      *
      * @throws \HuangYi\AliyunOss\Exceptions\RequestException
@@ -339,9 +340,8 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Rename a file.
      *
-     * @param string $path
-     * @param string $newpath
-     *
+     * @param  string  $path
+     * @param  string  $newpath
      * @return bool
      *
      * @throws \HuangYi\AliyunOss\Exceptions\RequestException
@@ -357,9 +357,8 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Copy a file.
      *
-     * @param string $path
-     * @param string $newpath
-     *
+     * @param  string  $path
+     * @param  string  $newpath
      * @return bool
      *
      * @throws \HuangYi\AliyunOss\Exceptions\RequestException
@@ -377,8 +376,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Delete a file.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return bool
      *
      * @throws \HuangYi\AliyunOss\Exceptions\RequestException
@@ -395,8 +393,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Delete a directory.
      *
-     * @param string $dirname
-     *
+     * @param  string  $dirname
      * @return bool
      *
      * @throws \HuangYi\AliyunOss\Exceptions\RequestException
@@ -425,9 +422,8 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Create a directory.
      *
-     * @param string $dirname directory name
-     * @param Config $config
-     *
+     * @param  string  $dirname directory name
+     * @param  Config  $config
      * @return array|false
      */
     public function createDir($dirname, Config $config)
@@ -446,9 +442,8 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Set the visibility for a file.
      *
-     * @param string $path
-     * @param string $visibility
-     *
+     * @param  string  $path
+     * @param  string  $visibility
      * @return array|false
      */
     public function setVisibility($path, $visibility)
@@ -473,8 +468,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Get the visibility of a file.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return array|false
      *
      * @throws \HuangYi\AliyunOss\Exceptions\RequestException
@@ -501,7 +495,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Handle request.
      *
-     * @param \Closure $callback
+     * @param  \Closure  $callback
      * @return mixed
      * @throws \HuangYi\AliyunOss\Exceptions\RequestException
      */
@@ -519,7 +513,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     }
 
     /**
-     * @param \Exception $exception
+     * @param  \Exception  $exception
      * @return bool
      */
     protected function isFileNotFound($exception)
@@ -551,7 +545,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Set options.
      *
-     * @param array $options
+     * @param  array  $options
      * @return $this
      */
     public function setOptions($options)
@@ -574,7 +568,7 @@ class AliyunOssAdapter extends AbstractAdapter implements CanOverwriteFiles
     /**
      * Set OssClient.
      *
-     * @param \HuangYi\AliyunOss\OssClient $client
+     * @param  \HuangYi\AliyunOss\OssClient  $client
      * @return $this
      */
     public function setClient(OssClient $client)
