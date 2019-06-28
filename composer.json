@@ -9,12 +9,6 @@
             "email": "coodeer@163.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://gitee.com/huang-yi/aliyun-oss.git"
-        }
-    ],
     "require": {
         "php": "^7.0",
         "huang-yi/aliyun-oss": "0.1.*",
